@@ -2,13 +2,18 @@ import { Metadata } from "next";
 import CabinsList from "../_components/CabinsList";
 import { Suspense } from "react";
 import Spinner from "../_components/Spinner";
-
-export const revalidate = 0b 
+import { CabinFilter } from "../_types/cabin";
+import Filter from "../_components/Filter";
 
 export const metadata: Metadata = {
   title: 'Cabins'
 }
-export default async function Cabins() {
+type CabinsProps = {
+  searchParams: Promise<{ capacity?: string }>
+}
+
+export default async function Cabins({ searchParams }: CabinsProps) {
+  const filter: CabinFilter = (await searchParams).capacity || 'all'
   return (
     <div>
       <h1 className="text-4xl mb-5 text-accent-400 font-medium">
@@ -22,9 +27,11 @@ export default async function Cabins() {
         away from home. The perfect spot for a peaceful, calm vacation. Welcome
         to paradise.
       </p>
-
-      <Suspense key={'unique-1'} fallback={<Spinner />}>
-        <CabinsList />
+      <div className="px-1 flex justify-end">
+        <Filter />
+      </div>
+      <Suspense key={filter} fallback={<Spinner />}>
+        <CabinsList filter={filter} />
       </Suspense>
 
     </div>

@@ -1,0 +1,1 @@
+export type FilterOption = 'small' | 'medium' | 'large' | 'all'
