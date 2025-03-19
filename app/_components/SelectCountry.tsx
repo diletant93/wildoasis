@@ -1,4 +1,4 @@
-import { getCountries } from '@/app/_lib/data-service';
+import { getCountries } from '../_services/data-service';
 import { Country, SelectCountryProps } from '../_types/country';
 
 async function SelectCountry({ defaultCountry, name, id, className }: SelectCountryProps) {
