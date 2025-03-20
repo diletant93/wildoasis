@@ -2,6 +2,7 @@ import { eachDayOfInterval } from 'date-fns';
 import supabase from '../_lib/supabase';
 import { Cabin } from '../_types/cabin';
 import { notFound } from 'next/navigation';
+import { Settings } from '../_types/settings';
 
 /////////////
 // GET
@@ -95,7 +96,7 @@ export async function getBookings(guestId:string) {
   return data;
 }
 
-export async function getBookedDatesByCabinId(cabinId:string) {
+export async function getBookedDatesByCabinId(cabinId:string):Promise<Date[]> {
   let today: Date | string = new Date();
   today.setUTCHours(0, 0, 0, 0);
   today = today.toISOString();
@@ -122,10 +123,10 @@ export async function getBookedDatesByCabinId(cabinId:string) {
     })
     .flat();
 
-  return bookedDates;
+  return bookedDates; 
 }
 
-export async function getSettings() {
+export async function getSettings(): Promise<Settings> {
   const { data, error } = await supabase.from('settings').select('*').single();
 
   if (error) {

@@ -1,8 +1,13 @@
+import BookingSection from "@/app/_components/BookingSection";
+import DateSelector from "@/app/_components/DateSelector";
+import ReservationForm from "@/app/_components/ReservationForm";
+import Spinner from "@/app/_components/Spinner";
 import TextExpander from "@/app/_components/TextExpander";
-import { getCabin, getCabins } from "@/app/_services/data-service";
+import { getBookedDatesByCabinId, getCabin, getCabins, getSettings } from "@/app/_services/data-service";
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
 import { Metadata } from "next";
 import Image from "next/image";
+import { Suspense } from "react";
 
 type CabinProps = {
     params: Promise<{ cabinid: string; }>
@@ -69,10 +74,13 @@ export default async function Cabin({ params }: CabinProps) {
                 </div>
             </div>
 
-            <div>
+            <div className="space-y-10">
                 <h2 className="text-5xl font-semibold text-center">
-                    Reserve today. Pay on arrival.
+                    Reserve {cabin.name} today. Pay on arrival.
                 </h2>
+                <Suspense fallback={<Spinner />} key={id}>
+                    <BookingSection id={id} />
+                </Suspense>
             </div>
         </div>
     );
