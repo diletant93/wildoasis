@@ -1,14 +1,18 @@
+import { BookingDatesProvider } from "../_context/BookingDatesContext";
 import { getBookedDatesByCabinId, getSettings } from "../_services/data-service";
+import { Cabin } from "../_types/cabin";
 import DateSelector from "./DateSelector";
 import ReservationForm from "./ReservationForm";
 
-export default async function BookingSection({ id }: { id: string }) {
+export default async function BookingSection({ cabin }: { cabin: Cabin }) {
     const [settings, bookingDates] = await Promise.all([getSettings(),
-    getBookedDatesByCabinId(id)])
+    getBookedDatesByCabinId(cabin.id)])
     return (
-        <div className="flex gap-10 items-center">
-            <DateSelector {...settings} />
-            <ReservationForm />
-        </div>
+        <BookingDatesProvider>
+            <div className="flex gap-10 items-center">
+                <DateSelector settings={settings} bookingDates={bookingDates} cabin={cabin} />
+                <ReservationForm cabin={cabin} />
+            </div>
+        </BookingDatesProvider>
     );
 }

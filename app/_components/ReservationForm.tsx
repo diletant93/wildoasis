@@ -1,4 +1,6 @@
-function ReservationForm() {
+import { Cabin } from "../_types/cabin";
+
+function ReservationForm({cabin}:{cabin:Cabin}) {
   // CHANGE
   const maxCapacity = 23;
 

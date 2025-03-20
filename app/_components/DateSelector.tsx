@@ -1,9 +1,12 @@
 "use client"
-import { isWithinInterval } from "date-fns";
+import { differenceInCalendarDays, isWithinInterval } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import { DateRange } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { Settings } from "../_types/settings";
+import { Cabin } from "../_types/cabin";
+import { useState } from "react";
+import { useBookingDatesContext } from "../_context/BookingDatesContext";
 
 // function isAlreadyBooked(range:DateRange, datesArr) {
 //   return (
@@ -14,25 +17,36 @@ import { Settings } from "../_types/settings";
 //     )
 //   );
 // }
-
-function DateSelector({minBookingLength, maxBookingLength}:Settings) {
+type DateSelectorProps = {
+  settings: Settings;
+  bookingDates: Date[];
+  cabin: Cabin;
+}
+function DateSelector({ settings, bookingDates, cabin }: DateSelectorProps) {
   // CHANGE
   const regularPrice = 23;
   const discount = 23;
   const numNights = 23;
   const cabinPrice = 23;
-  const range = { from: null, to: null };
-
+  const { range, handleRange } = useBookingDatesContext()
+  console.log(range)
+  const { minBookingLength, maxBookingLength } = settings;
+  let totalPrice: number = 0;
+  if (range?.from && range.to) {
+    totalPrice = differenceInCalendarDays(range?.to, range?.from) * cabinPrice
+  }
   return (
     <div className="flex flex-col justify-between">
       <DayPicker
+        selected={range}
+        onSelect={handleRange}
         className="place-self-center"
         mode="range"
         min={minBookingLength + 1}
         max={maxBookingLength}
         startMonth={new Date()}
         hidden={{ before: new Date() }}
-        toYear={new Date().getFullYear() + 5}
+        endMonth={new Date(new Date().getFullYear(), 5 * 12)}
         captionLayout="dropdown"
         numberOfMonths={1}
       />
@@ -59,16 +73,16 @@ function DateSelector({minBookingLength, maxBookingLength}:Settings) {
               </p>
               <p>
                 <span className="text-lg font-bold uppercase">Total</span>{" "}
-                <span className="text-2xl font-semibold">${cabinPrice}</span>
+                <span className="text-2xl font-semibold">${totalPrice}</span>
               </p>
             </>
           ) : null}
         </div>
 
-        {range.from || range.to ? (
+        {range && (range.from || range.to) ? (
           <button
-            className="border border-primary-800 py-2 px-4 text-sm font-semibold"
-          // onClick={() => resetRange()}
+            className="border border-primary-800 py-3 px-4 text-sm font-semibold cursor-pointer"
+            onClick={()=>handleRange(undefined)}
           >
             Clear
           </button>
