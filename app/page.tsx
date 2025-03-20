@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import bg from '@/public/bg.png'
-import { getCabin } from "./_services/data-service";
 export default async function Home() {
   return (
     <div className="mt-24">

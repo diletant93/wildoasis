@@ -12,7 +12,7 @@ const authConfig:NextAuthConfig ={
     ]
 }
 
-const {
+export const {
     auth,
     handlers:{GET,POST}
 } = NextAuth(authConfig)
