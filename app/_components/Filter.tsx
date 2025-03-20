@@ -6,11 +6,13 @@ import { filterOptions } from "../_constants/filter";
 
 export default function Filter() {
     const [option, setOption] = useState<FilterOption>('all')
+
     const searchParams = useSearchParams()
     const router = useRouter()
     const pathname = usePathname()
 
     const activeFilter = searchParams.get('capacity') ?? 'all' as FilterOption
+
     function handleFilter(filter: FilterOption) {
         setOption(filter)
         const params = new URLSearchParams(searchParams)
@@ -24,7 +26,7 @@ export default function Filter() {
                 <button key={option.value} onClick={() => handleFilter(option.value)} className={`px-4 py-3 hover:bg-primary-700 cursor-pointer ${option.value === activeFilter && 'bg-primary-700'}`}>
                     {option.label}
                 </button>
-            ))} 
+            ))}
         </div>
     );
 }
