@@ -10,8 +10,14 @@ const authConfig:NextAuthConfig ={
             clientSecret:process.env.NEXT_PRIVATE_GOOGLE_CLIENT_SECRET
         })
     ],
-    callbacks:undefined,
-    pages:undefined,
+    callbacks:{
+        authorized({auth}){
+            return Boolean(auth?.user)
+        }
+    },
+    pages:{
+        signIn:'/login'
+    },
 }
 
 export const {
