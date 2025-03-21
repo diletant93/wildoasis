@@ -3,6 +3,7 @@ import supabase from '../_lib/supabase';
 import { Cabin } from '../_types/cabin';
 import { notFound } from 'next/navigation';
 import { Settings } from '../_types/settings';
+import { Guest } from '../_types/guest';
 
 /////////////
 // GET
@@ -52,7 +53,7 @@ export const getCabins = async function () {
 };
 
 // Guests are uniquely identified by their email address
-export async function getGuest(email:string) {
+export async function getGuest(email:string):Promise<Guest> {
   const { data, error } = await supabase
     .from('guests')
     .select('*')
@@ -152,7 +153,7 @@ export async function getCountries() {
 /////////////
 // CREATE
 
-export async function createGuest(newGuest:string) {
+export async function createGuest(newGuest:Guest) {
   const { data, error } = await supabase.from('guests').insert([newGuest]);
 
   if (error) {

@@ -1,5 +1,6 @@
 import NextAuth, { NextAuthConfig } from "next-auth";
 import Google from "next-auth/providers/google";
+import { createGuest, getGuest } from "../_services/data-service";
 
 
 
@@ -13,10 +14,28 @@ const authConfig:NextAuthConfig ={
     callbacks:{
         authorized({auth}){
             return Boolean(auth?.user)
+        },
+        async signIn({user, account,profile}){
+            try {
+                if(!user.email || !user.name){
+                    return false
+                }   
+                const guest = await getGuest(user.email)
+                if(!guest.id){
+                    await createGuest({
+                        fullName:user.name,
+                        email:user.email
+                    })
+                }
+                return true
+            } catch {
+                return false
+            }
         }
     },
     pages:{
-        signIn:'/login'
+        signIn:'/login',
+        
     },
 }
 
