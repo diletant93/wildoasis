@@ -32,6 +32,17 @@ const authConfig:NextAuthConfig ={
                 console.error(error)
                 return false
             }
+        },
+        async session({session,user}){
+            const guest = await getGuest(session.user.email)
+            const modifiedSession = {
+                ...session,
+                user:{
+                    ...session.user,
+                    guestId:guest.id
+                }
+            }
+            return modifiedSession
         }
     },
     pages:{
