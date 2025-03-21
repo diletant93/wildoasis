@@ -2,6 +2,7 @@ import ProfileForm from "@/app/_components/ProfileForm";
 import SelectCountry from "@/app/_components/SelectCountry";
 import { auth } from "@/app/_lib/auth";
 import { getGuest } from "@/app/_services/data-service";
+import { Guest } from "@/app/_types/guest";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,12 +10,14 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
-  const session = await auth()
-  console.log(session?.user.guestId)
-  // CHANGE
   const countryFlag = "pt.jpg";
   const nationality = "portugal";
-
+  const session = await auth()
+  const guestEmail = session?.user.email
+  let guest: Guest = {fullName:'', email:'' , countryFlag:'', nationality:''};
+  if(guestEmail){
+     guest = await getGuest(guestEmail)
+  }
   return (
     <div>
       <h2 className="font-semibold text-2xl text-accent-400 mb-4">
@@ -27,6 +30,7 @@ export default async function Page() {
       </p>
 
       <ProfileForm
+        guest={guest}
         CountrySelector={
           <SelectCountry
             name="nationality"
