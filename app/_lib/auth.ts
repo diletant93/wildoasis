@@ -21,14 +21,15 @@ const authConfig:NextAuthConfig ={
                     return false
                 }   
                 const guest = await getGuest(user.email)
-                if(!guest.id){
+                if(!guest){
                     await createGuest({
                         fullName:user.name,
                         email:user.email
                     })
                 }
                 return true
-            } catch {
+            } catch (error){
+                console.error(error)
                 return false
             }
         }
