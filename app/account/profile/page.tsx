@@ -1,12 +1,16 @@
 import ProfileForm from "@/app/_components/ProfileForm";
 import SelectCountry from "@/app/_components/SelectCountry";
+import { auth } from "@/app/_lib/auth";
+import { getGuest } from "@/app/_services/data-service";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: 'Profile'
 }
 
-export default function Page() {
+export default async function Page() {
+  const session = await auth()
+  console.log(session?.user.guestId)
   // CHANGE
   const countryFlag = "pt.jpg";
   const nationality = "portugal";

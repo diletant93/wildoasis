@@ -1,7 +1,7 @@
 import NextAuth, { NextAuthConfig } from "next-auth";
 import Google from "next-auth/providers/google";
 import { createGuest, getGuest } from "../_services/data-service";
-
+import { ExtendedSession } from "../_types/extendedSession";
 
 
 const authConfig:NextAuthConfig ={
@@ -33,16 +33,16 @@ const authConfig:NextAuthConfig ={
                 return false
             }
         },
-        async session({session,user}){
+        async session({session}):Promise<ExtendedSession>{
             const guest = await getGuest(session.user.email)
-            const modifiedSession = {
+            const extendedSession = {
                 ...session,
                 user:{
                     ...session.user,
                     guestId:guest.id
                 }
             }
-            return modifiedSession
+            return extendedSession
         }
     },
     pages:{

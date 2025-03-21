@@ -1,4 +1,3 @@
-import axios from "axios";
 import { auth } from "../_lib/auth";
 export default async function Account() {
   const session = await auth()
