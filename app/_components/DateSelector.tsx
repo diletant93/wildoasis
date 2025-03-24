@@ -22,7 +22,7 @@ function DateSelector({ settings, bookingDates, cabin }: DateSelectorProps) {
   } = useDateSelector(cabin, settings, bookingDates)
 
   return (
-    <div className="flex flex-col justify-between flex-1 ">
+    <div className="flex flex-col justify-between flex-1 self-stretch ">
       <DayPicker
         selected={displayRange}
         onSelect={handleRange}

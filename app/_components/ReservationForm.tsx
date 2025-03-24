@@ -1,27 +1,50 @@
+"use client"
+import { differenceInCalendarDays } from "date-fns";
+import { useBookingDatesContext } from "../_context/BookingDatesContext";
 import { Cabin } from "../_types/cabin";
+import { ExtendedSession } from "../_types/extendedSession";
+import Link from "next/link";
+import { createBooking } from "../_services/data-service";
+import { createBookingAction } from "../_actions/reservationActions";
+import { PartialBooking } from "../_types/booking";
 
-function ReservationForm({cabin}:{cabin:Cabin}) {
-  // CHANGE
-  const maxCapacity = 23;
+function ReservationForm({ cabin, session }: { cabin: Cabin; session: ExtendedSession }) {
+  const { range } = useBookingDatesContext()
+  const { maxCapacity, regularPrice, discount, id } = cabin;
+  const startDate = range?.from
+  const endDate = range?.to
+  const numberNights = differenceInCalendarDays(endDate || '', startDate || '')
+  const cabinPrice = numberNights * (regularPrice - discount)
 
+  const bookingData: PartialBooking = {
+    startDate: startDate?.toISOString() || '',
+    endDate: endDate?.toISOString() || '',
+    numberNights,
+    cabinPrice,
+    cabinId: id,
+  }
+  const createBookingActionWithData = createBookingAction.bind(null, bookingData)
+  if (!session.user.name || !session.user.image) return null
   return (
-    <div className='scale-[1.01] flex-1'>
+    <div className='flex-1'>
       <div className='bg-primary-800 text-primary-300 px-16 py-2 flex justify-between items-center'>
         <p>Logged in as</p>
 
-        {/* <div className='flex gap-4 items-center'>
+        <div className='flex gap-4 items-center'>
           <img
             // Important to display google profile images
             referrerPolicy='no-referrer'
             className='h-8 rounded-full'
-            src={user.image}
-            alt={user.name}
+            src={session.user.image}
+            alt={session?.user.name}
           />
-          <p>{user.name}</p>
-        </div> */}
+          <Link href='/account/profile'>{session?.user.name}</Link>
+        </div>
       </div>
 
-      <form className='bg-primary-900 py-10 px-16 text-lg flex gap-5 flex-col'>
+      <form
+        action={createBookingActionWithData}
+        className='bg-primary-900 py-10 px-16 text-lg flex gap-5 flex-col'>
         <div className='space-y-2'>
           <label htmlFor='numGuests'>How many guests?</label>
           <select
