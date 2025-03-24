@@ -80,7 +80,7 @@ function ReservationCard({ booking, onDelete }: { booking: Booking; onDelete:(bo
         </div>
       </div>
 
-      {isPast(startDate) &&
+      {!isPast(startDate) &&
         <div className='flex flex-col border-l border-primary-800'>
           <Link
             href={`/account/reservations/edit/${id}`}
