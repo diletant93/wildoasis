@@ -9,7 +9,7 @@ export default async function BookingSection({ cabin }: { cabin: Cabin }) {
     getBookedDatesByCabinId(cabin.id)])
     return (
         <BookingDatesProvider>
-            <div className="flex gap-10 items-center">
+            <div className="flex gap-10 items-center w-full">
                 <DateSelector settings={settings} bookingDates={bookingDates} cabin={cabin} />
                 <ReservationForm cabin={cabin} />
             </div>

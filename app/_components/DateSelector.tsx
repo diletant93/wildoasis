@@ -24,19 +24,18 @@ type DateSelectorProps = {
 }
 function DateSelector({ settings, bookingDates, cabin }: DateSelectorProps) {
   // CHANGE
-  const regularPrice = 23;
-  const discount = 23;
-  const numNights = 23;
-  const cabinPrice = 23;
+  const {regularPrice,discount } = cabin
+  const cabinPrice = regularPrice - discount
   const { range, handleRange } = useBookingDatesContext()
-  console.log(range)
+  let numberNights: number = 0
   const { minBookingLength, maxBookingLength } = settings;
   let totalPrice: number = 0;
   if (range?.from && range.to) {
-    totalPrice = differenceInCalendarDays(range?.to, range?.from) * cabinPrice
+    numberNights = differenceInCalendarDays(range?.to, range?.from)
+    totalPrice = numberNights * cabinPrice
   }
   return (
-    <div className="flex flex-col justify-between">
+    <div className="flex flex-col justify-between flex-1 ">
       <DayPicker
         selected={range}
         onSelect={handleRange}
@@ -52,7 +51,7 @@ function DateSelector({ settings, bookingDates, cabin }: DateSelectorProps) {
       />
 
       <div className="flex items-center justify-between px-8 bg-accent-500 text-primary-800 h-[72px]">
-        <div className="flex items-baseline gap-6">
+        <div className="flex items-center gap-6">
           <p className="flex gap-2 items-baseline">
             {discount > 0 ? (
               <>
@@ -66,10 +65,10 @@ function DateSelector({ settings, bookingDates, cabin }: DateSelectorProps) {
             )}
             <span className="">/night</span>
           </p>
-          {numNights ? (
+          {numberNights ? (
             <>
               <p className="bg-accent-600 px-3 py-2 text-2xl">
-                <span>&times;</span> <span>{numNights}</span>
+                <span>&times;</span> <span>{numberNights}</span>
               </p>
               <p>
                 <span className="text-lg font-bold uppercase">Total</span>{" "}
@@ -82,7 +81,7 @@ function DateSelector({ settings, bookingDates, cabin }: DateSelectorProps) {
         {range && (range.from || range.to) ? (
           <button
             className="border border-primary-800 py-3 px-4 text-sm font-semibold cursor-pointer"
-            onClick={()=>handleRange(undefined)}
+            onClick={() => handleRange(undefined)}
           >
             Clear
           </button>

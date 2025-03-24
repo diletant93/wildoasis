@@ -26,7 +26,7 @@ export default async function Cabin({ params }: CabinProps) {
     const { cabinid: id } = await params
     const cabin = await getCabin(id)
     return (
-        <div className="max-w-6xl mx-auto mt-8">
+        <div className="w-full mx-auto mt-8">
             <CabinComponent cabin={cabin}/>
             <div className="space-y-10">
                 <h2 className="text-5xl font-semibold text-center">
