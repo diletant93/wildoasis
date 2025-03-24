@@ -1,34 +1,41 @@
 'use client'
 import { PencilSquareIcon } from '@heroicons/react/24/solid';
 import { format, formatDistance, isPast, isToday, parseISO } from 'date-fns';
-import DeleteReservation from '../../../../Users/artur/Downloads/ultimate-react-course-main (1)/ultimate-react-course-main/21-the-wild-oasis-website/starter/components/DeleteReservation';
+import DeleteReservation from './DeleteReservation';
 import { Booking } from '../_types/booking';
+import Image from 'next/image';
 
-export const formatDistanceFromNow = (dateStr:string) =>
+export const formatDistanceFromNow = (dateStr: string) =>
   formatDistance(parseISO(dateStr), new Date(), {
     addSuffix: true,
   }).replace('about ', '');
 
-function ReservationCard({ booking }: {booking : Booking}) {
+function ReservationCard({ booking }: { booking: Booking }) {
   const {
     id,
     guestId,
     startDate,
     endDate,
-    numNights,
+    numberNights,
     totalPrice,
     numGuests,
     status,
     created_at,
-    cabins: { name, image },
+    cabins,
   } = booking;
+  //since TS thinks the cabins is an array of {name,string} but it's actually an object of {name,string}
+  //we need to buypass the TS behavior (clearly the supabase fault)
+  let name: string = 'name' in cabins ? cabins.name as string : '';
+  let image: string = 'image' in cabins ? cabins.image as string : '';
+
 
   return (
     <div className='flex border border-primary-800'>
-      <div className='relative h-32 aspect-square'>
-        <img
+      <div className='relative h-40 aspect-square'>
+        <Image
           src={image}
           alt={`Cabin ${name}`}
+          fill
           className='object-cover border-r border-primary-800'
         />
       </div>
@@ -36,7 +43,7 @@ function ReservationCard({ booking }: {booking : Booking}) {
       <div className='flex-grow px-6 py-3 flex flex-col'>
         <div className='flex items-center justify-between'>
           <h3 className='text-xl font-semibold'>
-            {numNights} nights in Cabin {name}
+            {numberNights} nights in Cabin {''}
           </h3>
           {isPast(new Date(startDate)) ? (
             <span className='bg-yellow-800 text-yellow-200 h-7 px-3 uppercase text-xs font-bold flex items-center rounded-sm'>

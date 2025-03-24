@@ -4,6 +4,7 @@ import { Cabin } from '../_types/cabin';
 import { notFound } from 'next/navigation';
 import { Settings } from '../_types/settings';
 import { Guest } from '../_types/guest';
+import { Booking } from '../_types/booking';
 
 /////////////
 // GET
@@ -79,12 +80,12 @@ export async function getBooking(id:string) {
   return data;
 }
 
-export async function getBookings(guestId:string) {
+export async function getBookings(guestId:string):Promise<Booking[]> {
   const { data, error, count } = await supabase
     .from('bookings')
     // We actually also need data on the cabins as well. But let's ONLY take the data that we actually need, in order to reduce downloaded data.
     .select(
-      'id, created_at, startDate, endDate, numNights, numGuests, totalPrice, guestId, cabinId, cabins(name, image)'
+      'id, created_at, startDate, endDate, numberNights, numGuests, totalPrice, status, guestId, cabinId, cabins(name, image)'
     )
     .eq('guestId', guestId)
     .order('startDate');
@@ -93,8 +94,8 @@ export async function getBookings(guestId:string) {
     console.error(error);
     throw new Error('Bookings could not get loaded');
   }
-
-  return data;
+  //it returns {...data, cabins:{name,image}[]} even tho we expect it to be cabins:{image, name} (just an object)
+   return data;
 }
 
 export async function getBookedDatesByCabinId(cabinId:string):Promise<Date[]> {

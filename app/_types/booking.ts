@@ -1,16 +1,19 @@
+type BookingStatus = 'unconfirmed' | 'checked-out' | 'checked-in'
+
 export type Booking = {
-    id: string;
-    guestId: string;
-    startDate: string;
-    endDate: string;
-    numNights: string;
-    totalPrice: string;
-    numGuests: number;
-    status: string;
-    created_at: string;
-    cabins: {
+  id: string;
+  created_at: string;
+  startDate: string;
+  endDate: string;
+  numberNights: number;
+  numGuests: number;
+  totalPrice: number;
+  guestId: string;
+  cabinId: string;
+  status: BookingStatus;
+  cabins: {
       name: string;
       image: string;
-    };
+  }[];
   };
   
