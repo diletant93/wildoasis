@@ -4,7 +4,6 @@ import { useBookingDatesContext } from "../_context/BookingDatesContext";
 import { Cabin } from "../_types/cabin";
 import { ExtendedSession } from "../_types/extendedSession";
 import Link from "next/link";
-import { createBooking } from "../_services/data-service";
 import { createBookingAction } from "../_actions/reservationActions";
 import { PartialBooking } from "../_types/booking";
 import SubmitButton from "./SubmitButton";

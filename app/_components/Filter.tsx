@@ -5,7 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { filterOptions } from "../_constants/filter";
 
 export default function Filter() {
-    const [option, setOption] = useState<FilterOption>('all')
+    const [_, setOption] = useState<FilterOption>('all')
 
     const searchParams = useSearchParams()
     const router = useRouter()

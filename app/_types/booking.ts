@@ -11,10 +11,10 @@ export type Booking = {
   guestId: string;
   cabinId: string;
   status: BookingStatus;
-  observations:string;
-  extrasPrice:number;
-  isPaid:boolean;
-  hasBreakfast:false;
+  observations?:string;
+  extrasPrice?:number;
+  isPaid?:boolean;
+  hasBreakfast?:false;
   cabins?: {
       name: string;
       image: string;

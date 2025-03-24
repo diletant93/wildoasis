@@ -1,4 +1,3 @@
-
 import { navigationItems } from "../_constants/navigation";
 import NavigationItem from "./NavigationItem";
 import { auth } from "../_lib/auth";

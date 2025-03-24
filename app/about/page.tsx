@@ -1,5 +1,3 @@
-import about_1 from '@/public/about-1.jpg'
-import about_2 from '@/public/about-2.jpg'
 import Image from 'next/image';
 import { getCabins } from '../_services/data-service';
 export default async function About() {
