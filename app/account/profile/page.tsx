@@ -4,6 +4,7 @@ import { auth } from "@/app/_lib/auth";
 import { getGuest } from "@/app/_services/data-service";
 import { Guest } from "@/app/_types/guest";
 import { Metadata } from "next";
+import { useFormStatus } from "react-dom";
 
 export const metadata: Metadata = {
   title: 'Profile'
@@ -14,7 +15,6 @@ export default async function Page() {
   const session = await auth()
   const guestEmail = session?.user.email
   let guest: Guest = { fullName: '', email: '', countryFlag: '', nationality: '' };
-
   if (guestEmail) {
     guest = await getGuest(guestEmail)
   }

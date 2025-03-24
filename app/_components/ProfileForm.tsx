@@ -1,8 +1,8 @@
-"use client"
 import { Suspense } from "react";
 import SpinnerMini from "./SpinnerMini";
 import { Guest } from "../_types/guest";
 import { updateProfileAction } from "../_actions/profileActions";
+import SubmitButton from "./SubmitButton";
 
 export default function ProfileForm({ CountrySelector, guest }: { CountrySelector: React.ReactNode, guest: Guest }) {
     return (
@@ -50,9 +50,7 @@ export default function ProfileForm({ CountrySelector, guest }: { CountrySelecto
             </div>
 
             <div className="flex justify-end items-center gap-6">
-                <button type="submit" className="bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300">
-                    Update profile
-                </button>
+               <SubmitButton>Update profile</SubmitButton>
             </div>
         </form>
     );
