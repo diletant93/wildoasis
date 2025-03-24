@@ -11,6 +11,7 @@ export type Booking = {
   guestId: string;
   cabinId: string;
   status: BookingStatus;
+  observations?:string;
   cabins: {
       name: string;
       image: string;

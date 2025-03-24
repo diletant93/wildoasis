@@ -65,7 +65,7 @@ export async function getGuest(email:string):Promise<Guest> {
   return data;
 }
 
-export async function getBooking(id:string) {
+export async function getBooking(id:string):Promise<Booking> {
   const { data, error, count } = await supabase
     .from('bookings')
     .select('*')
