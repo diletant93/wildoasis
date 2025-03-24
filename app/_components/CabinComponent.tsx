@@ -12,7 +12,7 @@ export default function CabinComponent({cabin}:{cabin:Cabin}) {
     </div>
 
     <div>
-        <h3 className="text-accent-100 font-black text-7xl mb-5  bg-primary-950 py-6 pb-1 w-[150%]">
+        <h3 className="text-accent-100 font-black text-7xl mb-5  bg-primary-950 py-6 pb-1">
             Cabin {name}
         </h3>
 

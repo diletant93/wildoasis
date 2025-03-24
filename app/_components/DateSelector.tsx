@@ -1,53 +1,40 @@
 "use client"
-import { differenceInCalendarDays, isWithinInterval } from "date-fns";
 import { DayPicker } from "react-day-picker";
-import { DateRange } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { Settings } from "../_types/settings";
 import { Cabin } from "../_types/cabin";
-import { useState } from "react";
-import { useBookingDatesContext } from "../_context/BookingDatesContext";
+import { useDateSelector } from "../_hooks/useDateSelector";
+import { isPast } from "date-fns";
 
-// function isAlreadyBooked(range:DateRange, datesArr) {
-//   return (
-//     range.from &&
-//     range.to &&
-//     datesArr.some((date: Date) =>
-//       isWithinInterval(date, { start: range.from, end: range.to })
-//     )
-//   );
-// }
+
 type DateSelectorProps = {
   settings: Settings;
   bookingDates: Date[];
   cabin: Cabin;
 }
+
 function DateSelector({ settings, bookingDates, cabin }: DateSelectorProps) {
-  // CHANGE
-  const {regularPrice,discount } = cabin
-  const cabinPrice = regularPrice - discount
-  const { range, handleRange } = useBookingDatesContext()
-  let numberNights: number = 0
-  const { minBookingLength, maxBookingLength } = settings;
-  let totalPrice: number = 0;
-  if (range?.from && range.to) {
-    numberNights = differenceInCalendarDays(range?.to, range?.from)
-    totalPrice = numberNights * cabinPrice
-  }
+  const { displayRange, handleRange,
+    totalPrice, numberNights,
+    discount, regularPrice,
+    minBookingLength, maxBookingLength,
+    handleDisabled
+  } = useDateSelector(cabin, settings, bookingDates)
+
   return (
     <div className="flex flex-col justify-between flex-1 ">
       <DayPicker
-        selected={range}
+        selected={displayRange}
         onSelect={handleRange}
         className="place-self-center"
         mode="range"
         min={minBookingLength + 1}
         max={maxBookingLength}
         startMonth={new Date()}
-        hidden={{ before: new Date() }}
         endMonth={new Date(new Date().getFullYear(), 5 * 12)}
         captionLayout="dropdown"
         numberOfMonths={1}
+        disabled={handleDisabled}
       />
 
       <div className="flex items-center justify-between px-8 bg-accent-500 text-primary-800 h-[72px]">
@@ -78,7 +65,7 @@ function DateSelector({ settings, bookingDates, cabin }: DateSelectorProps) {
           ) : null}
         </div>
 
-        {range && (range.from || range.to) ? (
+        {displayRange && (displayRange.from || displayRange.to) ? (
           <button
             className="border border-primary-800 py-3 px-4 text-sm font-semibold cursor-pointer"
             onClick={() => handleRange(undefined)}
