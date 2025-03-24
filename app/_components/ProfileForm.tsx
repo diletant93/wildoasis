@@ -2,23 +2,18 @@
 import { Suspense } from "react";
 import SpinnerMini from "./SpinnerMini";
 import { Guest } from "../_types/guest";
-import { useGuestProfile } from "../_hooks/useGuestProfile";
+import { updateProfileAction } from "../_actions/profileActions";
 
-export default async function ProfileForm({CountrySelector, guest}:{CountrySelector:React.ReactNode, guest:Guest}) {
-    const {
-        name, setName,
-        email,setEmail,
-        nationality, setNationality,
-        nationalID, setNationalID
-    } = useGuestProfile(guest)
+export default function ProfileForm({ CountrySelector, guest }: { CountrySelector: React.ReactNode, guest: Guest }) {
     return (
-        <form className="bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col">
+        <form action={updateProfileAction} className="bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col">
             <div className="space-y-2">
                 <label>Full name</label>
                 <input
                     disabled
                     className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
-                    value={name}
+                    name="fullName"
+                    defaultValue={guest.fullName}
                 />
             </div>
 
@@ -27,7 +22,8 @@ export default async function ProfileForm({CountrySelector, guest}:{CountrySelec
                 <input
                     disabled
                     className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
-                    value={email}
+                    name="email"
+                    defaultValue={guest.email}
                 />
             </div>
 
@@ -35,13 +31,13 @@ export default async function ProfileForm({CountrySelector, guest}:{CountrySelec
                 <div className="flex items-center justify-between">
                     <label htmlFor="nationality">Where are you from?</label>
                     <img
-                        src={nationality}
+                        src={guest.countryFlag}
                         alt="Country flag"
                         className="h-5 rounded-sm"
                     />
                 </div>
                 <Suspense fallback={<SpinnerMini />} >
-                   {CountrySelector}
+                    {CountrySelector}
                 </Suspense>
             </div>
 
@@ -50,12 +46,11 @@ export default async function ProfileForm({CountrySelector, guest}:{CountrySelec
                 <input
                     name="nationalID"
                     className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
-                    value={nationalID}
                 />
             </div>
 
             <div className="flex justify-end items-center gap-6">
-                <button className="bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300">
+                <button type="submit" className="bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300">
                     Update profile
                 </button>
             </div>

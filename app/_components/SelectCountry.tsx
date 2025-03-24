@@ -1,5 +1,6 @@
 import { getCountries } from '../_services/data-service';
 import { Country, SelectCountryProps } from '../_types/country';
+import { cn } from '../_utils/cn';
 
 async function SelectCountry({ defaultCountry, name, id, className }: SelectCountryProps) {
   const countries = await getCountries();
@@ -12,9 +13,9 @@ async function SelectCountry({ defaultCountry, name, id, className }: SelectCoun
       id={id}
       // Here we use a trick to encode BOTH the country name and the flag into the value. Then we split them up again later in the server action
       defaultValue={`${defaultCountry}%${flag}`}
-      className={className}
+      className={cn(className, 'capitalize')}
     >
-      <option value=''>Select country...</option>
+      <option value=''>{defaultCountry}</option>
       {countries.map((c: Country) => (
         <option key={c.name} value={`${c.name}%${c.flag}`}>
           {c.name}

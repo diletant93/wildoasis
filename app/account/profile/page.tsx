@@ -10,14 +10,15 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
-  const countryFlag = "pt.jpg";
-  const nationality = "portugal";
+
   const session = await auth()
   const guestEmail = session?.user.email
-  let guest: Guest = {fullName:'', email:'' , countryFlag:'', nationality:''};
-  if(guestEmail){
-     guest = await getGuest(guestEmail)
+  let guest: Guest = { fullName: '', email: '', countryFlag: '', nationality: '' };
+
+  if (guestEmail) {
+    guest = await getGuest(guestEmail)
   }
+
   return (
     <div>
       <h2 className="font-semibold text-2xl text-accent-400 mb-4">
@@ -33,10 +34,10 @@ export default async function Page() {
         guest={guest}
         CountrySelector={
           <SelectCountry
-            name="nationality"
+            name="nationalityFlagCountry"
             id="nationality"
             className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
-            defaultCountry={nationality}
+            defaultCountry={guest.nationality || ''}
           />
         } />
 
