@@ -68,5 +68,5 @@ export async function createBookingAction(bookingData:PartialBooking,formData: F
     await createBooking(newBooking)
     revalidatePath('/account/reservations')
     revalidatePath(`/cabins/${bookingData.cabinId}`)
-    redirect('/thankyou')
+    redirect('/cabins/thankyou')
 }
