@@ -7,6 +7,7 @@ import Link from "next/link";
 import { createBooking } from "../_services/data-service";
 import { createBookingAction } from "../_actions/reservationActions";
 import { PartialBooking } from "../_types/booking";
+import SubmitButton from "./SubmitButton";
 
 function ReservationForm({ cabin, session }: { cabin: Cabin; session: ExtendedSession }) {
   const { range } = useBookingDatesContext()
@@ -77,11 +78,8 @@ function ReservationForm({ cabin, session }: { cabin: Cabin; session: ExtendedSe
         </div>
 
         <div className='flex justify-end items-center gap-6'>
-          <p className='text-primary-300 text-base'>Start by selecting dates</p>
-
-          <button className='bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300'>
-            Reserve now
-          </button>
+          {!(startDate && endDate) ? <p className='text-primary-300 text-base'>Start by selecting dates</p> :
+            <SubmitButton>Reserve now</SubmitButton>}
         </div>
       </form>
     </div>
