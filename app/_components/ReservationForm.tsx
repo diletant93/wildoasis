@@ -7,9 +7,14 @@ import Link from "next/link";
 import { createBookingAction } from "../_actions/reservationActions";
 import { PartialBooking } from "../_types/booking";
 import SubmitButton from "./SubmitButton";
+import { useActionToast } from "../_hooks/useActionToast";
+import { useRouter } from "next/navigation";
 
 function ReservationForm({ cabin, session }: { cabin: Cabin; session: ExtendedSession }) {
+
   const { range } = useBookingDatesContext()
+  const actionToast = useActionToast()
+  const router = useRouter()
   const { maxCapacity, regularPrice, discount, id } = cabin;
   const startDate = range?.from
   const endDate = range?.to
@@ -24,6 +29,11 @@ function ReservationForm({ cabin, session }: { cabin: Cabin; session: ExtendedSe
     cabinId: id,
   }
   const createBookingActionWithData = createBookingAction.bind(null, bookingData)
+  async function createBookingWrapper(formData: FormData) {
+    const response = await createBookingActionWithData(formData)
+    actionToast(response)
+    if (response.status === 'success') router.push('/cabins/thankyou')
+  }
   if (!session.user.name || !session.user.image) return null
   return (
     <div className='flex-1'>
@@ -43,7 +53,7 @@ function ReservationForm({ cabin, session }: { cabin: Cabin; session: ExtendedSe
       </div>
 
       <form
-        action={createBookingActionWithData}
+        action={createBookingWrapper}
         className='bg-primary-900 py-10 px-16 text-lg flex gap-5 flex-col'>
         <div className='space-y-2'>
           <label htmlFor='numGuests'>How many guests?</label>

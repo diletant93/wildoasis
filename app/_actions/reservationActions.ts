@@ -134,7 +134,6 @@ export async function createBookingAction(bookingData: PartialBooking, formData:
     await createBooking(newBooking);
     revalidatePath('/account/reservations');
     revalidatePath(`/cabins/${bookingData.cabinId}`);
-    redirect('/cabins/thankyou');
     return {
       status: 'success',
       message: 'Booking created successfully',
