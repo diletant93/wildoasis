@@ -7,59 +7,73 @@ import { ProfileData } from "../_types/profileData"
 import { ActionResponse } from "../_types/actionResponse"
 
 export async function updateProfileAction(formData: FormData): Promise<ActionResponse> {
-  const session = await auth();
-  if (!session?.user) {
-      return {
-          status: 'error',
-          message: 'You are not authenticated',
-      };
-  }
+    try {
+        const session = await auth();
+        if (!session?.user) {
+            return {
+                status: 'error',
+                message: 'You are not authenticated',
+            };
+        }
 
-  const { nationalID, nationalityFlagCountry } = Object.fromEntries(formData) as ProfileData;
+        const { nationalID, nationalityFlagCountry } = Object.fromEntries(formData) as ProfileData;
 
-  if (!nationalID) {
-      return {
-          status: 'error',
-          message: 'National ID is required.',
-      };
-  }
-  if (!nationalID.match(/^[A-Za-z0-9]{6,12}$/)) {
-      return {
-          status: 'error',
-          message: 'National ID must be 6 to 12 characters long and contain only letters and numbers.',
-      };
-  }
-  if (!nationalityFlagCountry) {
-      return {
-          status: 'error',
-          message: 'Nationality must be specified.',
-      };
-  }
+        if (!nationalID) {
+            return {
+                status: 'error',
+                message: 'National ID is required.',
+            };
+        }
+        if (!nationalID.match(/^[A-Za-z0-9]{6,12}$/)) {
+            return {
+                status: 'error',
+                message: 'National ID must be 6 to 12 characters long and contain only letters and numbers.',
+            };
+        }
+        if (!nationalityFlagCountry) {
+            return {
+                status: 'error',
+                message: 'Nationality must be specified.',
+            };
+        }
 
-  const [country, flag] = nationalityFlagCountry.split('%');
-  const updatedFields = {
-      nationality: country,
-      countryFlag: flag,
-      nationalID,
-  };
+        const [country, flag] = nationalityFlagCountry.split('%');
+        const updatedFields = {
+            nationality: country,
+            countryFlag: flag,
+            nationalID,
+        };
 
-  const { error } = await supabase
-      .from('guests')
-      .update(updatedFields)
-      .eq('id', session.user.guestId);
+        const { error } = await supabase
+            .from('guests')
+            .update(updatedFields)
+            .eq('id', session.user.guestId);
 
-  if (error) {
-      console.error(error);
-      return {
-          status: 'error',
-          message: 'Guest could not be updated',
-      };
-  }
+        if (error) {
+            console.error(error);
+            return {
+                status: 'error',
+                message: 'Guest could not be updated',
+            };
+        }
 
-  revalidatePath('/account/profile');
+        revalidatePath('/account/profile');
 
-  return {
-      status: 'success',
-      message: 'Profile updated successfully',
-  };
+        return {
+            status: 'success',
+            message: 'Profile updated successfully',
+        };
+    } catch (error) {
+        if (error instanceof Error) {
+            return {
+                status: 'error',
+                message: error.message,
+            };
+        } else {
+            return {
+                status: 'error',
+                message: 'An unexpected error occurred.',
+            };
+        }
+    }
 }
