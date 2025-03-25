@@ -3,23 +3,17 @@ import { useRouter } from "next/navigation";
 import { updateReservationAction } from "../_actions/reservationActions";
 import { Booking } from "../_types/booking";
 import SubmitButton from "./SubmitButton";
+import { useActionToast } from "../_hooks/useActionToast";
 
-import { toast } from "sonner";
-
-export default function ReservationEditForm({booking, maxCapacity}:{booking:Booking, maxCapacity:number}) {
-    const {numGuests, id:bookingId, observations} = booking
+export default function ReservationEditForm({ booking, maxCapacity }: { booking: Booking, maxCapacity: number }) {
+    const { numGuests, id: bookingId, observations } = booking
     const router = useRouter()
-      async function handleUpdate(formData: FormData){
-           const response = await updateReservationAction(bookingId || '', formData)
-           
-           if(response.status === 'error'){
-            toast.error(response.message)
-           }
-           if(response.status === 'success'){
-            toast.success(response.message)
-            router.push('/account/reservations')
-           }
-        }
+    const actionToast = useActionToast()
+    async function handleUpdate(formData: FormData) {
+        const response = await updateReservationAction(bookingId || '', formData)
+        actionToast(response)
+        if (response.status === 'success') router.push('/account/reservations')
+    }
     return (
         <form
             action={handleUpdate}
