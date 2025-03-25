@@ -7,4 +7,4 @@ export type Cabin = {
     description:string;
     image: string;
   };
-export type CabinFilter = 'all' | string
+export type CabinFilter = 'all' | 'small' | 'medium' | 'large' | string

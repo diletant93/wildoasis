@@ -9,7 +9,8 @@ export default async function ReservationEdit({ params }: { params: Promise<{ id
     const { maxCapacity } = await getCabin(cabinId)
     async function handleUpdate(formData: FormData){
         'use server'
-        await updateReservationAction(bookingId || '', formData)
+       const response = await updateReservationAction(bookingId || '', formData)
+       console.log(response)
     }
     return (
         <div>

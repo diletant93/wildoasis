@@ -1,7 +1,6 @@
 "use client"
 import { useFormStatus } from "react-dom";
 import SpinnerMini from "./SpinnerMini";
-
 export default function SubmitButton({ children }: { children: React.ReactNode }) {
     const { pending } = useFormStatus()
     return (

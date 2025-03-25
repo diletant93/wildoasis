@@ -3,7 +3,6 @@ import { useState } from "react";
 import { FilterOption } from "../_types/filter";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { filterOptions } from "../_constants/filter";
-
 export default function Filter() {
     const [_, setOption] = useState<FilterOption>('all')
 

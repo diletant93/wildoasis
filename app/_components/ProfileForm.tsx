@@ -1,12 +1,21 @@
+"use client"
+
 import { Suspense } from "react";
 import SpinnerMini from "./SpinnerMini";
 import { Guest } from "../_types/guest";
 import { updateProfileAction } from "../_actions/profileActions";
 import SubmitButton from "./SubmitButton";
+import { toast } from "sonner";
+import { useActionToast } from "../_hooks/useActionToast";
 
 export default function ProfileForm({ CountrySelector, guest }: { CountrySelector: React.ReactNode, guest: Guest }) {
+    const actionToast = useActionToast()
+    async function handleUpdate(formData: FormData) {
+        const response = await updateProfileAction(formData)
+        actionToast(response)
+    }
     return (
-        <form action={updateProfileAction} className="bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col">
+        <form action={handleUpdate} className="bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col">
             <div className="space-y-2">
                 <label>Full name</label>
                 <input
@@ -50,7 +59,7 @@ export default function ProfileForm({ CountrySelector, guest }: { CountrySelecto
             </div>
 
             <div className="flex justify-end items-center gap-6">
-               <SubmitButton>Update profile</SubmitButton>
+                <SubmitButton>Update profile</SubmitButton>
             </div>
         </form>
     );

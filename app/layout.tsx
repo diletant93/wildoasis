@@ -3,6 +3,8 @@ import './globals.css'
 import { Josefin_Sans } from 'next/font/google';
 import { cn } from "./_utils/cn";
 import Header from "./_components/Header";
+import Providers from "./_providers/Providers";
+import { Toaster } from "@/components/ui/sonner";
 
 const josefin = Josefin_Sans({
   subsets: ['latin'],
@@ -11,8 +13,8 @@ const josefin = Josefin_Sans({
 
 export const metadata: Metadata = {
   title: {
-    template:'%s | The Wild Oasis',
-    default:'The Wild Oasis'
+    template: '%s | The Wild Oasis',
+    default: 'The Wild Oasis'
   },
   description: 'Discover and book the most luxurious hotels worldwide, offering unparalleled comfort, elegance, and top-tier hospitality.',
 
@@ -26,7 +28,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <div className="flex-1 grid px-8 py-12">
           <main className="max-w-7xl mx-auto w-full">
-            {children}
+            <Providers>
+              {children}
+            </Providers>
           </main>
         </div>
       </body>
