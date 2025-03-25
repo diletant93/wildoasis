@@ -40,7 +40,8 @@ export async function deleteReservationAction(bookingId:string) : Promise<Action
         status:'success',
         message:'Reservation deleted',
     }
-}export async function updateReservationAction(bookingId: string, formData: FormData): Promise<ActionResponse> {
+}
+export async function updateReservationAction(bookingId: string, formData: FormData): Promise<ActionResponse> {
     const session = await auth();
     if (!session?.user.guestId) {
         return {
