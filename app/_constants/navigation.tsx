@@ -1,19 +1,22 @@
 import { CalendarDaysIcon, HomeIcon, UserIcon } from "@heroicons/react/24/solid";
 import { AccountNavigationItem, NavigationItem } from "../_types/navigation";
-
+import {CircleUserIcon, House, Info} from 'lucide-react'
 export const navigationItems : NavigationItem[] =[
     {
         label:'cabins',
-        path:'/cabins'
+        path:'/cabins',
+        iconForSmallDevices:<House />,
     },
     {
         label:'about',
-        path:'/about'
+        path:'/about',
+        iconForSmallDevices:<Info/>,
     },
     
     {
         label:'account',
-        path:'/account'
+        path:'/account',
+        iconForSmallDevices:<CircleUserIcon />,
     },
 
 ]

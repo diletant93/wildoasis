@@ -6,10 +6,10 @@ import Image from "next/image";
 export default async function Navigation() {
   const session = await auth()
   return (
-    <nav className="z-10 text-xl">
-      <ul className="flex gap-16 items-center">
+    <nav className="z-10 text-xl flex-1 sm:flex-none">
+      <ul className="flex gap-3 md:gap-16 items-center">
         {navigationItems.map(item => item.label === 'account' && session?.user?.image ? (
-          <NavigationItem key={item.label} path={item.path}>
+          <NavigationItem key={item.label} path={item.path} iconForSmallDevices={item.iconForSmallDevices}>
             <Image
               src={session?.user.image}
               width={30}
@@ -21,7 +21,7 @@ export default async function Navigation() {
               {session.user.name}
             </span>
           </NavigationItem>
-        ) : <NavigationItem key={item.label} path={item.path}>{item.label}</NavigationItem>
+        ) : <NavigationItem key={item.label} path={item.path} iconForSmallDevices={item.iconForSmallDevices}>{item.label}</NavigationItem>
         )}
       </ul>
     </nav>

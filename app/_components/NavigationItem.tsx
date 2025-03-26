@@ -1,9 +1,19 @@
+'use client'
 import Link from "next/link";
-
-export default function NavigationItem({ path, children }: { path: string; children: React.ReactNode }) {
+import { useMediaQuery } from "../_hooks/useMediaQuery";
+import { MEDIA_QUERIES } from "../_types/mediaQueries";
+type NavigationItemProps = {
+    path: string;
+    children: React.ReactNode;
+    iconForSmallDevices: React.ReactNode;
+}
+export default function NavigationItem({ path, iconForSmallDevices, children }: NavigationItemProps) {
+    const matches = useMediaQuery(MEDIA_QUERIES.SM)
     return (
-        <li>
-            <Link href={path} className="hover:text-accent-400 transition-colors capitalize flex gap-3 items-center">{children}</Link>
-        </li>
+        <Link href={path} className="flex-1 sm:flex-non py-3 px-1">
+            <li className="hover:text-accent-400 transition-colors capitalize flex justify-center gap-3 items-center px-2 py-2 bg-accent-600 sm:bg-transparent rounded-full">
+                {matches ? iconForSmallDevices : children}
+            </li>
+        </Link>
     );
 }

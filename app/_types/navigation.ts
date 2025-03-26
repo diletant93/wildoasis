@@ -1,6 +1,7 @@
 export type NavigationItem = {
     label:string;
     path:string;
+    iconForSmallDevices:React.ReactNode;
 }
 export type AccountNavigationItem = {
     name:string;

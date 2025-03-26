@@ -25,13 +25,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html>
-      <body className={cn('bg-primary-950 text-primary-100 min-h-screen flex flex-col relative', josefin.className)}>
+      <body className={cn('bg-primary-950 text-primary-100 min-h-screen  flex flex-col relative', josefin.className)}>
         <Header />
         <div className="flex-1 grid px-8 py-12">
-          <main className="max-w-7xl mx-auto w-full">
+          <main className="max-w-7xl grid sm:block mx-auto w-full">
             <Providers>
               {children}
-            </Providers>         
+            </Providers>
           </main>
         </div>
       </body>
