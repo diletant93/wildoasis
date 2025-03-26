@@ -3,10 +3,12 @@
 import React from "react";
 import { QueryProvider } from "./QueryProvider";
 import { Toaster } from "sonner";
+import ScreenSizeWidget from "../_components/ScreenSizeWidget";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <QueryProvider>
+      <ScreenSizeWidget/>
       {children}
       <Toaster position="top-left"
         toastOptions={{

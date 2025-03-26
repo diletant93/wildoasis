@@ -5,6 +5,7 @@ import { cn } from "./_utils/cn";
 import Header from "./_components/Header";
 import Providers from "./_providers/Providers";
 import { Toaster } from "@/components/ui/sonner";
+import ScreenSizeWidget from "./_components/ScreenSizeWidget";
 
 const josefin = Josefin_Sans({
   subsets: ['latin'],
@@ -30,7 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="max-w-7xl mx-auto w-full">
             <Providers>
               {children}
-            </Providers>
+            </Providers>         
           </main>
         </div>
       </body>
