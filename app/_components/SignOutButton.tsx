@@ -1,6 +1,6 @@
 "use client"
 import { ArrowRightOnRectangleIcon } from '@heroicons/react/24/solid';
-import { signInAction, signOutAction } from '../_actions/authActions';
+import { signOutAction } from '../_actions/authActions';
 import { useActionToast } from '../_hooks/useActionToast';
 
 function SignOutButton() {
