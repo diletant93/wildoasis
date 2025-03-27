@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 function SideNavigation() {
   const pathname = usePathname()
   return (
-    <nav className='border-r border-primary-900 h-full flex-1 sticky'>
+    <nav className='border-r border-primary-900 md:h-full flex-1 sticky'>
       <ul className='flex flex-col gap-2 h-full text-lg'>
         {accountNavigationItems.map((link) => (
           <li key={link.name} >

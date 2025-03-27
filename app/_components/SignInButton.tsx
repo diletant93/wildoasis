@@ -1,16 +1,8 @@
-'use client'
 import Image from "next/image";
 import { signInAction } from "../_actions/authActions";
-import { useActionToast } from "../_hooks/useActionToast";
-
 function SignInButton() {
-  const actionToast = useActionToast()
-  async function handleSignIn(){
-    const response = await signInAction()
-    actionToast(response)
-  }
   return (
-    <form action={handleSignIn}>
+    <form action={signInAction}>
       <button className='flex items-center gap-6 text-lg border border-primary-300 px-10 py-4 font-medium hover:bg-primary-400 hover:text-accent-200 transition-colors duration-300 cursor-pointer'>
         <Image
           src='https://authjs.dev/img/providers/google.svg'

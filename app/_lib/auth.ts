@@ -7,8 +7,15 @@ import { ExtendedSession } from "../_types/extendedSession";
 const authConfig:NextAuthConfig ={
     providers:[
         Google({
-            clientId:process.env.NEXT_PRIVATE_GOOGLE_CLIENT_ID,
-            clientSecret:process.env.NEXT_PRIVATE_GOOGLE_CLIENT_SECRET
+            clientId:process.env.NEXTAUTH_GOOGLE_CLIENT_ID,
+            clientSecret:process.env.NEXTAUTH_GOOGLE_CLIENT_SECRET,
+            authorization: {
+                params: {
+                    prompt: "consent",
+                    access_type: "offline",
+                    response_type: "code"
+                }
+            }
         })
     ],
     callbacks:{
