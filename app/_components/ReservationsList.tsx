@@ -4,6 +4,7 @@ import { Booking } from "../_types/booking";
 import { deleteReservationAction } from "../_actions/reservationActions";
 import { useActionToast } from "../_hooks/useActionToast";
 import ReservationCard from "./ReservationCard";
+import { differenceInCalendarDays } from "date-fns";
 
 export default function ReservationsList({ bookings }: { bookings: Booking[] }) {
     const [optimisticBookings, optimisticDelete] = useOptimistic(
@@ -24,10 +25,10 @@ export default function ReservationsList({ bookings }: { bookings: Booking[] }) 
             }
         })
     }
-
+    const sortedBookings = [...optimisticBookings].sort((b1, b2) => differenceInCalendarDays(b2.endDate, b1.endDate))
     return (
         <ul className="space-y-6 p-1">
-            {optimisticBookings.map((booking) => (
+            {sortedBookings.map((booking) => (
                 <ReservationCard
                     booking={booking}
                     key={booking.id}
