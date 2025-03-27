@@ -19,7 +19,6 @@ export default function Providers({ children }: { children: React.ReactNode }) {
           }
         }}
       />
-      <ScreenSizeWidget position="top left" />
     </QueryProvider>
   );
 }
