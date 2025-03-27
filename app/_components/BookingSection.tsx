@@ -13,7 +13,7 @@ export default async function BookingSection({ cabin }: { cabin: Cabin }) {
     if(!session) return <SignInButton/>
     return (
         <BookingDatesProvider>
-            <div className="flex gap-10  w-full">
+            <div className="flex gap-10 w-full flex-col md:flex-row">
                 <DateSelector settings={settings} bookingDates={bookingDates} cabin={cabin} />
                 <ReservationForm cabin={cabin}  session={session}/>
             </div>

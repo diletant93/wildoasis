@@ -36,13 +36,12 @@ function ReservationForm({ cabin, session }: { cabin: Cabin; session: ExtendedSe
   }
   if (!session.user.name || !session.user.image) return null
   return (
-    <div className='flex-1'>
-      <div className='bg-primary-800 text-primary-300 px-16 py-2 flex justify-between items-center'>
+    <div className='flex-1 flex flex-col'>
+      <div className='bg-primary-800 text-primary-300 px-2 md:px-4 py-5 flex justify-between items-center'>
         <p>Logged in as</p>
 
         <div className='flex gap-4 items-center'>
           <img
-            // Important to display google profile images
             referrerPolicy='no-referrer'
             className='h-8 rounded-full'
             src={session.user.image}
@@ -54,7 +53,7 @@ function ReservationForm({ cabin, session }: { cabin: Cabin; session: ExtendedSe
 
       <form
         action={createBookingWrapper}
-        className='bg-primary-900 py-10 px-16 text-lg flex gap-5 flex-col'>
+        className='bg-primary-900 py-10 px-3 md:px-5 text-lg flex gap-5 flex-col flex-1'>
         <div className='space-y-2'>
           <label htmlFor='numGuests'>How many guests?</label>
           <select

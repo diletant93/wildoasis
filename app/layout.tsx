@@ -28,7 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={cn('bg-primary-950 text-primary-100 h-screen flex flex-col relative', josefin.className)}>
         <Header />
         <Providers>
-          <div className="flex-1 grid py-8 overflow-y-auto md:overflow-y-scroll md:px-8 md:py-12">
+          <div className="flex-1 grid  overflow-y-auto md:overflow-y-scroll md:px-8 md:py-12">
             <main className="max-w-[80rem] 2xl:max-w-[100rem] grid sm:block mx-auto w-full">
               {children}
             </main>

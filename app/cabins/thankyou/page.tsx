@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Page() {
     return (
-        <div className="text-center space-y-6 mt-4">
+        <div className="text-center space-y-6 mt-4 place-self-center md:place-self-auto">
             <h1 className="text-3xl font-semibold">
                 Thank you for your reservation!
             </h1>

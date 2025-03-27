@@ -26,10 +26,10 @@ export default async function Cabin({ params }: CabinProps) {
     const { cabinid: id } = await params
     const cabin = await getCabin(id)
     return (
-        <div className="w-full mx-auto mt-8">
+        <div className="w-full mx-auto pt-8 md:pt-0">
             <CabinComponent cabin={cabin}/>
             <div className="space-y-10">
-                <h2 className="text-5xl font-semibold text-center 2xl:text-6xl">
+                <h2 className="text-2xl p-1 font-semibold text-center md:text-4xl ">
                     Reserve {cabin.name} today. Pay on arrival.
                 </h2>
                 <Suspense fallback={<Spinner />} key={id}>

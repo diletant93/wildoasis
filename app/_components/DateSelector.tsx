@@ -24,7 +24,7 @@ function DateSelector({ settings, bookingDates, cabin }: DateSelectorProps) {
         mode="range"
         selected={displayRange}
         onSelect={handleRange}
-        className="rounded-md border place-self-center !p-10"
+        className="rounded-md border place-self-center !p-5 sm:!p-10"
         classNames={{
           nav_button: '!w-10 !h-10 flex items-center justify-center hover:!bg-primary-700 !rounded-full',
           day_selected: '!bg-primary-600',
@@ -33,24 +33,24 @@ function DateSelector({ settings, bookingDates, cabin }: DateSelectorProps) {
         }}
         fromDate={new Date()}
         toDate={new Date(new Date().setFullYear(new Date().getFullYear() + 1))}
-        min={minBookingLength + 1}
+        min={2}
         max={maxBookingLength}
         disabled={handleDisabled}
       />
-      <div className="flex items-center justify-between px-8 bg-accent-500 text-primary-800 h-[72px]">
-        <div className="flex items-center gap-6">
+      <div className="flex items-center justify-between px-3 bg-accent-500 text-primary-800 h-[72px]">
+        <div className="flex items-center gap-2 md:gap-6">
           <p className="flex gap-2 items-baseline">
             {discount > 0 ? (
               <>
-                <span className="text-2xl">${regularPrice - discount}</span>
-                <span className="line-through font-semibold text-primary-700">
+                <span className="text-xl">${regularPrice - discount}</span>
+                <span className="text-sm line-through font-semibold text-primary-700">
                   ${regularPrice}
                 </span>
               </>
             ) : (
               <span className="text-2xl">${regularPrice}</span>
             )}
-            <span className="">/night</span>
+            <span className="">{!displayRange?.to && '/night'}</span>
           </p>
           {numberNights ? (
             <>
@@ -58,8 +58,8 @@ function DateSelector({ settings, bookingDates, cabin }: DateSelectorProps) {
                 <span>&times;</span> <span>{numberNights}</span>
               </p>
               <p>
-                <span className="text-lg font-bold uppercase">Total</span>{" "}
-                <span className="text-2xl font-semibold">${totalPrice}</span>
+                <span className="text-sm md:text-lg font-bold uppercase">Total</span>{" "}
+                <span className="text-lg md:text-2xl font-semibold">${totalPrice}</span>
               </p>
             </>
           ) : null}

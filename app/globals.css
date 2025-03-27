@@ -177,6 +177,7 @@
 
 ::-webkit-scrollbar {
   width: 8px;
+  position: fixed;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
