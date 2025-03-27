@@ -24,7 +24,7 @@ export default async function Cabins({ searchParams }: CabinsProps) {
   const filter: CabinFilter = (await searchParams).capacity || 'all'
   return (
       <div>
-        <h1 className="text-2xl md:text-4xl mb-5 text-accent-400 font-medium px-4 md:px-0">
+        <h1 className="text-2xl md:text-4xl mb-5 text-accent-400 font-medium px-4 md:px-0 2xl:text-7xl">
           Our Luxury Cabins
         </h1>
         <CabinDescription/>

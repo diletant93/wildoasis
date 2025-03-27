@@ -8,7 +8,7 @@ export default async function Home() {
       <Image src={bg} fill className="object-cover object-top absolute inset-0" placeholder="blur" quality={100} alt="Mountains and forests with two cabins" />
 
       <div className="relative z-10 text-center">
-        <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl text-primary-50 mb-7 md:mb-10 tracking-tight font-normal">
+        <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl text-primary-50 mb-7 md:mb-10 tracking-tight font-normal 2xl:text-8xl 2xl:mb-20">
           Welcome to paradise.
         </h1>
         <LinkButton href="/cabins">Explore luxury cabins</LinkButton>

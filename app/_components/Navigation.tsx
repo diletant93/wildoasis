@@ -10,13 +10,14 @@ export default async function Navigation() {
       <ul className="flex gap-3 md:gap-10 items-center">
         {navigationItems.map(item => item.label === 'account' && session?.user?.image ? (
           <NavigationItem key={item.label} path={item.path} iconForSmallDevices={item.iconForSmallDevices}>
-            <Image
-              src={session?.user.image}
-              width={30}
-              height={30}
-              alt="user avatar"
-              className="rounded-full -translate-y-[3px]"
-            />
+            <div className="w-[30px] 2xl:w-[50px] aspect-square relative 2xl:mr-2">
+              <Image
+                src={session?.user.image}
+                fill
+                alt="user avatar"
+                className="rounded-full -translate-y-[3px]"
+              />
+            </div>
             <span>
               {session.user.name}
             </span>
