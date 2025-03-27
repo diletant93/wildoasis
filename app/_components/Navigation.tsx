@@ -7,7 +7,7 @@ export default async function Navigation() {
   const session = await auth()
   return (
     <nav className="z-10 text-xl flex-1 sm:flex-none">
-      <ul className="flex gap-3 md:gap-16 items-center">
+      <ul className="flex gap-3 md:gap-10 items-center">
         {navigationItems.map(item => item.label === 'account' && session?.user?.image ? (
           <NavigationItem key={item.label} path={item.path} iconForSmallDevices={item.iconForSmallDevices}>
             <Image

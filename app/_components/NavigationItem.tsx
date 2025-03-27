@@ -10,8 +10,16 @@ type NavigationItemProps = {
 export default function NavigationItem({ path, iconForSmallDevices, children }: NavigationItemProps) {
     const matches = useMediaQuery(MEDIA_QUERIES.SM)
     return (
-        <Link href={path} className="flex-1 sm:flex-non py-3 px-1">
-            <li className="hover:text-accent-400 transition-colors capitalize flex justify-center gap-3 items-center px-2 py-2 bg-accent-600 sm:bg-transparent rounded-full">
+        <Link href={path} className="flex-1 sm:flex-none py-3 px-1">
+            <li
+                className="hover:text-accent-400
+                transition-colors capitalize flex
+                justify-center gap-3 items-center
+                px-2 py-2 bg-accent-600
+                rounded-full sm:bg-transparent 
+                sm:text-lg 
+                lg:text-xl
+                xl:text-2xl">
                 {matches ? iconForSmallDevices : children}
             </li>
         </Link>
