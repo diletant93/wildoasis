@@ -26,7 +26,7 @@ export default function ReservationsList({ bookings }: { bookings: Booking[] }) 
     }
 
     return (
-        <ul className="space-y-6">
+        <ul className="space-y-6 p-1">
             {optimisticBookings.map((booking) => (
                 <ReservationCard
                     booking={booking}

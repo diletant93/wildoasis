@@ -18,7 +18,7 @@ export default async function Page() {
   console.log(bookings)
   return (
     <div className="">
-      <h2 className="font-semibold text-2xl text-accent-400 my-7">
+      <h2 className="font-semibold text-2xl text-accent-400 my-4 xs:my-7">
         Your reservations
       </h2>
 

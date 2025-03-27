@@ -59,8 +59,8 @@ export default function ProfileForm({ CountrySelector, guest }: { CountrySelecto
                 />
             </div>
 
-            <div className="flex justify-center items-center gap-6">
-                <SubmitButton>Update profile</SubmitButton>
+            <div className="flex justify-center items-center gap-6 xs:justify-end">
+                <SubmitButton className="!w-full xs:!w-auto">Update profile</SubmitButton>
             </div>
         </form>
     );

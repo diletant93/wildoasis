@@ -7,7 +7,7 @@ export default async function ReservationEdit({ params }: { params: Promise<{ id
     const {cabinId , id:bookingId} = booking
     const { maxCapacity } = await getCabin(cabinId)
     return (
-        <div>
+        <div className="p-2 xs:p-0">
             <h2 className="font-semibold text-2xl text-accent-400 mb-7">
                 Edit Reservation #{bookingId}
             </h2>

@@ -17,7 +17,7 @@ export default function ReservationEditForm({ booking, maxCapacity }: { booking:
     return (
         <form
             action={handleUpdate}
-            className="bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col">
+            className="bg-primary-900 px-4 py-5 xs:py-8 xs:px-12 text-lg flex gap-6 flex-col">
             <div className="space-y-2">
                 <label htmlFor="numGuests">How many guests?</label>
                 <select
@@ -50,7 +50,7 @@ export default function ReservationEditForm({ booking, maxCapacity }: { booking:
             </div>
 
             <div className="flex justify-end items-center gap-6">
-                <SubmitButton>Update reservation</SubmitButton>
+                <SubmitButton className="!w-full xs:!w-auto">Update reservation</SubmitButton>
             </div>
         </form>
     );

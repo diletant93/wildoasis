@@ -43,7 +43,7 @@ function ReservationCard({ booking, onDelete }: { booking: Booking; onDelete:(bo
           src={image}
           alt={`Cabin ${name}`}
           fill
-          className='object-cover border-r border-primary-800'
+          className='object-cover xs:border-rborder-primary-800'
         />
       </div>
 
