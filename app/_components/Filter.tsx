@@ -22,7 +22,10 @@ export default function Filter() {
     return (
         <div className="flex  my-5 border border-primary-700">
             {filterOptions.map(option => (
-                <button key={option.value} onClick={() => handleFilter(option.value)} className={`px-4 py-3 hover:bg-primary-700 cursor-pointer ${option.value === activeFilter && 'bg-primary-700'}`}>
+                <button
+                    key={option.value}
+                    onClick={() => handleFilter(option.value)}
+                    className={`px-4 py-3 hover:bg-primary-700 cursor-pointer 2xl:text-3xl 2xl:px-5 2xl:py-4 ${option.value === activeFilter && 'bg-primary-700'}`}>
                     {option.label}
                 </button>
             ))}

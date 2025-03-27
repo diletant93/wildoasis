@@ -29,7 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <Providers>
           <div className="flex-1 grid py-8 overflow-y-auto md:overflow-y-scroll md:px-8 md:py-12">
-            <main className="max-w-7xl grid sm:block mx-auto w-full">
+            <main className="max-w-[80rem] 2xl:max-w-[120rem] grid sm:block mx-auto w-full">
               {children}
             </main>
           </div>
