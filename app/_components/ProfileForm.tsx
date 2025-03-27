@@ -15,7 +15,7 @@ export default function ProfileForm({ CountrySelector, guest }: { CountrySelecto
         actionToast(response)
     }
     return (
-        <form action={handleUpdate} className="bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col">
+        <form action={handleUpdate} className="bg-primary-900 py-8 px-4 md:px-12 text-lg flex gap-6 flex-col mr-2 md:mr-0">
             <div className="space-y-2">
                 <label>Full name</label>
                 <input
@@ -38,7 +38,8 @@ export default function ProfileForm({ CountrySelector, guest }: { CountrySelecto
 
             <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                    <label htmlFor="nationality">Where are you from?</label>
+                    <label htmlFor="nationality" className="hidden md:block">Where are you from?</label>
+                    <label htmlFor="nationality" className="md:hidden">Origin</label>
                     <img
                         src={guest.countryFlag}
                         alt="Country flag"
@@ -58,7 +59,7 @@ export default function ProfileForm({ CountrySelector, guest }: { CountrySelecto
                 />
             </div>
 
-            <div className="flex justify-end items-center gap-6">
+            <div className="flex justify-center items-center gap-6">
                 <SubmitButton>Update profile</SubmitButton>
             </div>
         </form>

@@ -17,8 +17,8 @@ export default async function Page() {
   const bookings = await getBookings(guestId)
   console.log(bookings)
   return (
-    <div>
-      <h2 className="font-semibold text-2xl text-accent-400 mb-7">
+    <div className="">
+      <h2 className="font-semibold text-2xl text-accent-400 my-7">
         Your reservations
       </h2>
 

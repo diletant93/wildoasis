@@ -57,6 +57,8 @@
   --color-accent-800: #6C4D28;
   --color-accent-900: #4B351B;
   --color-accent-950: #382814;
+
+  --breakpoint-xs:640px;
 }
 
 :root {
