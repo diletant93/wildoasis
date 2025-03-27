@@ -37,7 +37,7 @@ function ReservationForm({ cabin, session }: { cabin: Cabin; session: ExtendedSe
   if (!session.user.name || !session.user.image) return null
   return (
     <div className='flex-1 flex flex-col'>
-      <div className='bg-primary-800 text-primary-300 px-2 md:px-4 py-5 flex justify-between items-center'>
+      <div className='bg-primary-800 text-primary-300 px-2 md:px-4 flex justify-between items-center'>
         <p>Logged in as</p>
 
         <div className='flex gap-4 items-center'>
@@ -54,12 +54,12 @@ function ReservationForm({ cabin, session }: { cabin: Cabin; session: ExtendedSe
       <form
         action={createBookingWrapper}
         className='bg-primary-900 py-10 px-3 md:px-5 text-lg flex gap-5 flex-col flex-1'>
-        <div className='space-y-2'>
+        <div className='space-y-2 flex flex-col'>
           <label htmlFor='numGuests'>How many guests?</label>
           <select
             name='numGuests'
             id='numGuests'
-            className='px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm'
+            className='px-5 py-3 bg-primary-200 text-primary-800 shadow-sm rounded-sm'
             required
           >
             <option value='' key=''>
