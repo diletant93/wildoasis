@@ -20,24 +20,6 @@ function DateSelector({ settings, bookingDates, cabin }: DateSelectorProps) {
   } = useDateSelector(cabin, settings, bookingDates)
   return (
     <div className="flex flex-col justify-between flex-1 self-stretch ">
-      {/* <DayPicker
-        selected={displayRange}
-        onSelect={handleRange}
-        className="place-self-center 2xl:text-3xl"
-        mode="range"
-        min={minBookingLength + 1}
-        max={maxBookingLength}
-        startMonth={new Date()}
-        endMonth={new Date(new Date().getFullYear(), 5 * 12)}
-        captionLayout="dropdown"
-        numberOfMonths={1}
-        disabled={handleDisabled}
-        classNames={{
-          month_caption:'2xl:text-2xl',
-          button_next:'daypicker-button',
-          button_previous:'daypicker-button',
-        }}
-      /> */}
       <Calendar
         mode="range"
         selected={displayRange}
@@ -46,7 +28,8 @@ function DateSelector({ settings, bookingDates, cabin }: DateSelectorProps) {
         classNames={{
           nav_button: '!w-10 !h-10 flex items-center justify-center hover:!bg-primary-700 !rounded-full',
           day_selected: '!bg-primary-600',
-          cell: '!text-sm'
+          cell: '!text-sm',
+          caption_label: "text-xl font-bold",
         }}
         fromDate={new Date()}
         toDate={new Date(new Date().setFullYear(new Date().getFullYear() + 1))}

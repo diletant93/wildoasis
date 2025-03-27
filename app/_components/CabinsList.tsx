@@ -14,7 +14,7 @@ export default async function CabinsList({ filter }: { filter: CabinFilter }) {
         }
     });
     return (
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 xl:gap-14">
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 p-1  sm:p-0 gap-8 lg:gap-12 xl:gap-14 ">
             {displayedCabins.map((cabin) => (
                 <CabinCard cabin={cabin} key={cabin.id} />
             ))}

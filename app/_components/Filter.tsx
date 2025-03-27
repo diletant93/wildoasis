@@ -25,7 +25,7 @@ export default function Filter() {
                 <button
                     key={option.value}
                     onClick={() => handleFilter(option.value)}
-                    className={`px-4 py-3 hover:bg-primary-700 cursor-pointer 2xl:text-2xl 2xl:px-5 2xl:py-4 ${option.value === activeFilter && 'bg-primary-700'}`}>
+                    className={`px-2  py-3 hover:bg-primary-700 cursor-pointer sm:px-4 2xl:text-2xl 2xl:px-5 2xl:py-4 ${option.value === activeFilter && 'bg-primary-700'}`}>
                     {option.label}
                 </button>
             ))}
