@@ -1,11 +1,9 @@
 "use client"
-import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { Settings } from "../_types/settings";
 import { Cabin } from "../_types/cabin";
 import { useDateSelector } from "../_hooks/useDateSelector";
-import { isPast } from "date-fns";
-
+import { Calendar } from "@/components/ui/calendar";
 
 type DateSelectorProps = {
   settings: Settings;
@@ -20,13 +18,12 @@ function DateSelector({ settings, bookingDates, cabin }: DateSelectorProps) {
     minBookingLength, maxBookingLength,
     handleDisabled
   } = useDateSelector(cabin, settings, bookingDates)
-
   return (
     <div className="flex flex-col justify-between flex-1 self-stretch ">
-      <DayPicker
+      {/* <DayPicker
         selected={displayRange}
         onSelect={handleRange}
-        className="place-self-center"
+        className="place-self-center 2xl:text-3xl"
         mode="range"
         min={minBookingLength + 1}
         max={maxBookingLength}
@@ -35,8 +32,28 @@ function DateSelector({ settings, bookingDates, cabin }: DateSelectorProps) {
         captionLayout="dropdown"
         numberOfMonths={1}
         disabled={handleDisabled}
+        classNames={{
+          month_caption:'2xl:text-2xl',
+          button_next:'daypicker-button',
+          button_previous:'daypicker-button',
+        }}
+      /> */}
+      <Calendar
+        mode="range"
+        selected={displayRange}
+        onSelect={handleRange}
+        className="rounded-md border place-self-center !p-10"
+        classNames={{
+          nav_button: '!w-10 !h-10 flex items-center justify-center hover:!bg-primary-700 !rounded-full',
+          day_selected: '!bg-primary-600',
+          cell: '!text-sm'
+        }}
+        fromDate={new Date()}
+        toDate={new Date(new Date().setFullYear(new Date().getFullYear() + 1))}
+        min={minBookingLength + 1}
+        max={maxBookingLength}
+        disabled={handleDisabled}
       />
-
       <div className="flex items-center justify-between px-8 bg-accent-500 text-primary-800 h-[72px]">
         <div className="flex items-center gap-6">
           <p className="flex gap-2 items-baseline">

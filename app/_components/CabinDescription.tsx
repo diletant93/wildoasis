@@ -13,7 +13,7 @@ export default function CabinDescription() {
         </p>
     )
     return (
-        <p className="text-primary-200 mb-10 text-lg lg:text-xl 2xl:text-4xl">
+        <p className="text-primary-200 mb-10 text-lg lg:text-xl 2xl:text-2xl">
             Cozy yet luxurious cabins, located right in the heart of the Italian
             Dolomites. Imagine waking up to beautiful mountain views, spending your
             days exploring the dark forests around, or just relaxing in your private

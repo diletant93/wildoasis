@@ -20,7 +20,7 @@ export default function NavigationItem({ path, iconForSmallDevices, children }: 
                 sm:text-lg 
                 lg:text-xl
                 xl:text-2xl
-                2xl:text-3xl">
+                ">
                 {matches ? iconForSmallDevices : children}
             </li>
         </Link>

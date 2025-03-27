@@ -29,7 +29,7 @@ export default async function Cabin({ params }: CabinProps) {
         <div className="w-full mx-auto mt-8">
             <CabinComponent cabin={cabin}/>
             <div className="space-y-10">
-                <h2 className="text-5xl font-semibold text-center">
+                <h2 className="text-5xl font-semibold text-center 2xl:text-6xl">
                     Reserve {cabin.name} today. Pay on arrival.
                 </h2>
                 <Suspense fallback={<Spinner />} key={id}>
