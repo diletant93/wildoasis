@@ -30,12 +30,14 @@ function DateSelector({ settings, bookingDates, cabin }: DateSelectorProps) {
           day_selected: '!bg-primary-600',
           cell: '!text-sm',
           caption_label: "text-xl font-bold",
+
         }}
         fromDate={new Date()}
         toDate={new Date(new Date().setFullYear(new Date().getFullYear() + 1))}
         min={2}
         max={maxBookingLength}
         disabled={handleDisabled}
+       
       />
       <div className="flex items-center justify-between px-3 bg-accent-500 text-primary-800 h-[72px]">
         <div className="flex items-center gap-2 md:gap-6">
