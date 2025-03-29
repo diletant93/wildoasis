@@ -10,7 +10,7 @@ export default async function BookingSection({ cabin }: { cabin: Cabin }) {
     const [settings, bookingDates] = await Promise.all([getSettings(),
     getBookedDatesByCabinId(cabin.id)])
     const session = await auth()
-    if(!session) return <SignInButton/>
+    if(!session) return <div className="flex justify-center"><SignInButton/></div>
     return (
         <BookingDatesProvider>
             <div className="flex gap-10 w-full flex-col md:flex-row">
