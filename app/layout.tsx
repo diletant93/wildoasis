@@ -18,7 +18,10 @@ export const metadata: Metadata = {
     default: 'The Wild Oasis'
   },
   description: 'Discover and book the most luxurious hotels worldwide, offering unparalleled comfort, elegance, and top-tier hospitality.',
-
+  viewport:{
+    width:'device-width',
+    initialScale:1.0,
+  }
 };
 
 
