@@ -5,7 +5,6 @@ import SpinnerMini from "./SpinnerMini";
 import { Guest } from "../_types/guest";
 import { updateProfileAction } from "../_actions/profileActions";
 import SubmitButton from "./SubmitButton";
-import { toast } from "sonner";
 import { useActionToast } from "../_hooks/useActionToast";
 
 export default function ProfileForm({ CountrySelector, guest }: { CountrySelector: React.ReactNode, guest: Guest }) {

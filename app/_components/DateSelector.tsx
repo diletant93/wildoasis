@@ -12,10 +12,11 @@ type DateSelectorProps = {
 }
 
 function DateSelector({ settings, bookingDates, cabin }: DateSelectorProps) {
-  const { displayRange, handleRange,
+  const { 
+    displayRange, handleRange,
     totalPrice, numberNights,
     discount, regularPrice,
-    minBookingLength, maxBookingLength,
+    maxBookingLength,
     handleDisabled
   } = useDateSelector(cabin, settings, bookingDates)
   return (
@@ -26,9 +27,8 @@ function DateSelector({ settings, bookingDates, cabin }: DateSelectorProps) {
         onSelect={handleRange}
         className="rounded-md border place-self-center !p-5 sm:!p-10"
         classNames={{
-          nav_button: '!w-10 !h-10 flex items-center justify-center hover:!bg-primary-700 !rounded-full',
-          day_selected: '!bg-primary-600',
-          cell: '!text-sm',
+          day_button: '!w-10 !h-10 flex items-center justify-center hover:!bg-primary-700 !rounded-full',
+          selected: '!bg-primary-600',
           caption_label: "text-xl font-bold",
         }}
         fromDate={new Date()}
