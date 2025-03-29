@@ -1,5 +1,4 @@
 "use client"
-import { ScreenSizeLabel } from "../_types/mediaQueries";
 import { useWindowWidth } from "../_hooks/useWindowWidth";
 import { mediaQueriesSizes } from "../_constants/mediaQueriesSizes";
 import { Position } from "../_types/position";

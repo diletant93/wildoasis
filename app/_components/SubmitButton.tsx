@@ -1,8 +1,6 @@
 "use client"
 import { useFormStatus } from "react-dom";
 import SpinnerMini from "./SpinnerMini";
-import { useMediaQuery } from "../_hooks/useMediaQuery";
-import { MEDIA_QUERIES } from "../_types/mediaQueries";
 import { cn } from "@/lib/utils";
 export default function SubmitButton({ children, className }: {className?:string; children: React.ReactNode }) {
     const { pending } = useFormStatus()
