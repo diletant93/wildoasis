@@ -4,7 +4,7 @@ import { signIn, signOut } from "../_lib/auth"
 import { ActionResponse } from "../_types/actionResponse"
 
 export async function signOutAction(): Promise<ActionResponse> {
-    await signOut({ redirectTo: '/cabins' })
+    await signOut({ redirectTo: '/' })
     return {
       status: 'success',
       message: 'Signed out successfully',
