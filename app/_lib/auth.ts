@@ -52,7 +52,7 @@ const authConfig:NextAuthConfig ={
 }
 
 export const {
-    auth,
+    auth, 
     signIn,
     signOut,
     handlers:{GET,POST}
