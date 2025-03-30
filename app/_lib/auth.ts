@@ -16,22 +16,23 @@ const authConfig:NextAuthConfig ={
             return Boolean(auth?.user)
         },
         async signIn({user, account,profile}){
-            try {
-                if(!user.email || !user.name){
-                    return false
-                }   
-                const guest = await getGuest(user.email)
-                if(!guest){
-                    await createGuest({
-                        fullName:user.name,
-                        email:user.email
-                    })
-                }
-                return true
-            } catch (error){
-                console.error(error)
-                return false
-            }
+            // try {
+            //     if(!user.email || !user.name){
+            //         return false
+            //     }   
+            //     const guest = await getGuest(user.email)
+            //     if(!guest){
+            //         await createGuest({
+            //             fullName:user.name,
+            //             email:user.email
+            //         })
+            //     }
+            //     return true
+            // } catch (error){
+            //     console.error(error)
+            //     return false
+            // }
+            return true;
         },
         async session({session}):Promise<ExtendedSession>{
             const guest = await getGuest(session.user.email)
