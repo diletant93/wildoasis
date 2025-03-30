@@ -1,59 +1,45 @@
+
 import NextAuth, { NextAuthConfig } from "next-auth";
-import Google from "next-auth/providers/google";
+import Google from 'next-auth/providers/google'
 import { createGuest, getGuest } from "../_services/data-service";
-import { ExtendedSession } from "../_types/extendedSession";
 
-
-const authConfig:NextAuthConfig ={
+const authConfig :NextAuthConfig = {
     providers:[
-        Google({
-            clientId:process.env.AUTH_GOOGLE_ID,
-            clientSecret:process.env.AUTH_GOOGLE_SECRET,
-        })
+        Google({clientId:process.env.AUTH_GOOGLE_ID, clientSecret:process.env.AUTH_GOOGLE_SECRET})
     ],
     callbacks:{
         authorized({auth}){
             return Boolean(auth?.user)
         },
-        async signIn({user, account,profile}){
+       async signIn({user,account,profile}){
             try {
-                if(!user.email || !user.name){
-                    return false
-                }   
-                const guest = await getGuest(user.email)
-                if(!guest){
-                    await createGuest({
-                        fullName:user.name,
-                        email:user.email
-                    })
+                if(!user.email || !user.name) return false
+
+                const existingGuest = await getGuest(user.email)
+
+                if(!existingGuest){
+                    await createGuest({email:user.email,fullName:user.name})
                 }
+
                 return true
-            } catch (error){
-                console.error(error)
+            } catch (error) {
                 return false
             }
-            return true;
         },
-        async session({session}):Promise<ExtendedSession>{
+        async session({session,user}){
             const guest = await getGuest(session.user.email)
-            const extendedSession = {
-                ...session,
-                user:{
-                    ...session.user,
-                    guestId:guest.id
-                }
-            }
-            return extendedSession
+            session.user.guestId = guest.id
+            return session
         }
     },
     pages:{
-        signIn:'/login',
-    },
+        signIn:'/login'
+    }
 }
 
 export const {
-    auth, 
+    auth,
     signIn,
     signOut,
-    handlers:{GET,POST}
-} = NextAuth(authConfig)
+    handlers:{GET,POST}} = NextAuth(authConfig)
+    
