@@ -9,13 +9,6 @@ const authConfig:NextAuthConfig ={
         Google({
             clientId:process.env.NEXTAUTH_GOOGLE_CLIENT_ID,
             clientSecret:process.env.NEXTAUTH_GOOGLE_CLIENT_SECRET,
-            authorization: {
-                params: {
-                    prompt: "consent",
-                    access_type: "offline",
-                    response_type: "code"
-                }
-            }
         })
     ],
     callbacks:{
