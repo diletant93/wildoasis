@@ -7,8 +7,8 @@ import { ExtendedSession } from "../_types/extendedSession";
 const authConfig:NextAuthConfig ={
     providers:[
         Google({
-            clientId:process.env.NEXTAUTH_GOOGLE_CLIENT_ID,
-            clientSecret:process.env.NEXTAUTH_GOOGLE_CLIENT_SECRET,
+            clientId:process.env.AUTH_GOOGLE_ID,
+            clientSecret:process.env.AUTH_GOOGLE_SECRET,
         })
     ],
     callbacks:{
@@ -16,22 +16,22 @@ const authConfig:NextAuthConfig ={
             return Boolean(auth?.user)
         },
         async signIn({user, account,profile}){
-            // try {
-            //     if(!user.email || !user.name){
-            //         return false
-            //     }   
-            //     const guest = await getGuest(user.email)
-            //     if(!guest){
-            //         await createGuest({
-            //             fullName:user.name,
-            //             email:user.email
-            //         })
-            //     }
-            //     return true
-            // } catch (error){
-            //     console.error(error)
-            //     return false
-            // }
+            try {
+                if(!user.email || !user.name){
+                    return false
+                }   
+                const guest = await getGuest(user.email)
+                if(!guest){
+                    await createGuest({
+                        fullName:user.name,
+                        email:user.email
+                    })
+                }
+                return true
+            } catch (error){
+                console.error(error)
+                return false
+            }
             return true;
         },
         async session({session}):Promise<ExtendedSession>{
