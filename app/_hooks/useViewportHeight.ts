@@ -14,7 +14,6 @@ export function useViewportHeight(){
             window.visualViewport.addEventListener('resize',updateHeight,{signal})
             window.visualViewport.addEventListener('orientationchange',updateHeight,{signal})
         }
-        console.log('working')
         return () => abort()
     },[])
 }
