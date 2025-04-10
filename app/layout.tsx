@@ -28,7 +28,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html>
-      <body className={cn('bg-primary-950 text-primary-100 flex flex-col relative h-[calc(var(--vh,1vh)*100)]', josefin.className)}>
+      <body className={cn('bg-primary-950 text-primary-100 flex flex-col relative h-dvh', josefin.className)}>
         <ViewportHeightProvider />
         <Header />
         <Providers>
