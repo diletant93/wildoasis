@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 
 export function useViewportHeight(){
-    useEffect(()=>{
+    useLayoutEffect(()=>{
         const {abort, signal} = new AbortController()
         function updateHeight(){
             const vh = window.innerHeight * 0.01
