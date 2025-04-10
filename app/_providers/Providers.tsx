@@ -3,6 +3,7 @@
 import React from "react";
 import { QueryProvider } from "./QueryProvider";
 import { Toaster } from "sonner";
+import ViewportHeightProvider from "./ViewportHeightProvider";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -18,6 +19,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
           }
         }}
       />
+      <ViewportHeightProvider/>
     </QueryProvider>
   );
 }

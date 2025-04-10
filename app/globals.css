@@ -173,9 +173,10 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground h-[calc((--vh,1vh)*100)] sm:h-auto;
   }
 }
+
 
 ::-webkit-scrollbar {
   width: 8px;
