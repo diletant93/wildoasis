@@ -4,6 +4,7 @@ import { Josefin_Sans } from 'next/font/google';
 import { cn } from "./_utils/cn";
 import Header from "./_components/Header";
 import Providers from "./_providers/Providers";
+import ViewportHeightProvider from "./_providers/ViewportHeightProvider";
 
 const josefin = Josefin_Sans({
   subsets: ['latin'],
@@ -27,7 +28,8 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html>
-      <body className={cn('bg-primary-950 text-primary-100 flex flex-col relative', josefin.className)}>
+      <body className={cn('bg-primary-950 text-primary-100 flex flex-col relative h-[calc(var(--vh,1vh)*100)]', josefin.className)}>
+        <ViewportHeightProvider />
         <Header />
         <Providers>
           <div className="flex-1 grid  overflow-y-auto md:overflow-y-scroll md:px-8 md:py-12">

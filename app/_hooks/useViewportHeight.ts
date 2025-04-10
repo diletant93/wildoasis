@@ -1,19 +1,32 @@
-import { useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
+
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 export function useViewportHeight(){
-    useLayoutEffect(()=>{
-        const {abort, signal} = new AbortController()
+    useIsomorphicLayoutEffect(() => {
         function updateHeight(){
-            const vh = window.innerHeight * 0.01
-            document.documentElement.style.setProperty('--vh',`${vh}px`)
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
         }
-        updateHeight()
-        window.addEventListener('resize',updateHeight, {signal})
-        window.addEventListener('orientationchange',updateHeight,{signal})
+        
+        updateHeight();
+        
+        window.addEventListener('resize', updateHeight);
+        window.addEventListener('orientationchange', updateHeight);
+        
         if(window.visualViewport){
-            window.visualViewport.addEventListener('resize',updateHeight,{signal})
-            window.visualViewport.addEventListener('orientationchange',updateHeight,{signal})
+            window.visualViewport.addEventListener('resize', updateHeight);
+            window.visualViewport.addEventListener('scroll', updateHeight); 
         }
-        return () => abort()
-    },[])
+        
+        return () => {
+            window.removeEventListener('resize', updateHeight);
+            window.removeEventListener('orientationchange', updateHeight);
+            
+            if(window.visualViewport){
+                window.visualViewport.removeEventListener('resize', updateHeight);
+                window.visualViewport.removeEventListener('scroll', updateHeight);
+            }
+        };
+    }, []);
 }
