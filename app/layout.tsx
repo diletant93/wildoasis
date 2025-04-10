@@ -27,7 +27,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html>
-      <body className={cn('bg-primary-950 text-primary-100 h-screen flex flex-col relative', josefin.className)}>
+      <body className={cn('bg-primary-950 text-primary-100 flex flex-col relative', josefin.className)}>
         <Header />
         <Providers>
           <div className="flex-1 grid  overflow-y-auto md:overflow-y-scroll md:px-8 md:py-12">
